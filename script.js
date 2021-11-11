@@ -41,6 +41,9 @@ var pwCriteria = {
   specialCharacters: specChar
   }
 
+var desiredTasks = [];
+var password = [];
+
   //random value functions
 function randomLower(){
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
@@ -56,10 +59,8 @@ function randomSpecChar(){
   return SpecCharList[Math.floor(Math.random() * SpecCharList.length)];
 }
 
-var password = [];
 
-
-// Write password to the #password input
+// when called (with button click) start the prompts for input values
 function writePassword() {
   
   // first prompt for desired password length
@@ -78,16 +79,34 @@ function otherCriteriaInput() {
   window.alert("Please select which of the following 4 criteria you would like your password to contain."); 
   var lowercaseCheck = window.confirm("Lowercase Letters");
     pwCriteria.lowercase = lowercaseCheck;
-  
+    if (lowercaseCheck === true){
+      desiredTasks.push("lowercase");
+    }
+
   var uppercaseCheck = window.confirm("Uppercase Letters");
     pwCriteria.uppercase = uppercaseCheck;
+    if (uppercaseCheck === true){
+      desiredTasks.push("uppercase");
+    }
 
   var numCheck = window.confirm("Numbers");
     pwCriteria.numeric = numCheck;
+    if (numCheck === true){
+      desiredTasks.push("numbers");
+    }
 
   var specCharCheck = window.confirm("Special Characters");
     pwCriteria.specialCharacters = specCharCheck;
     console.log(pwCriteria);
+    if (specCharCheck === true){
+      desiredTasks.push("special characters");
+    }
+    
+    if (lowercaseCheck === false && uppercaseCheck === false 
+      && numCheck === false && specCharCheck === false) {
+        window.alert("Please select at least one item to include in your password.");
+        return otherCriteriaInput();
+      }
   
   if (pwCriteria.lowercase === true) {
   pwCriteria.lowercase = "Yes"
@@ -113,7 +132,7 @@ function otherCriteriaInput() {
   else {
     pwCriteria.specialCharacters = "No"
   };
-
+  
   var confirmInputs = window.confirm("Here's what you entered." + "\nPassword Length: " + 
   pwCriteria.characters + "\nLowercase Letters: " + pwCriteria.lowercase + "\nUppercase Letters: "
   + pwCriteria.uppercase + "\nNumbers: " + pwCriteria.numeric + "\nSpecial Characters: " 
@@ -122,10 +141,36 @@ function otherCriteriaInput() {
     window.alert("Whoops! Let's try starting over.");
     return otherCriteriaInput();
   }
-  function generatePassword(){
-
-  }
+// now we move on to actually generating the password
+  generatePassword();
 };
+
+function generatePassword() {
+// 2. randomize between these true statements
+// desiredTasks.random = function(){
+// }
+var randomSelect = desiredTasks[Math.floor(Math.random() * desiredTasks.length)];
+console.log(randomSelect);
+
+  // 3. run the function associated with the true statement run
+  if (randomSelect === "lowercase") {
+    password.push(randomLower());
+  }
+  else if (randomSelect === "uppercase") {
+    password.push(randomUpper());
+  }
+  else if (randomSelect === "number") {
+    password.push(randomNumber());
+  }
+  else if (randomSelect === "special characters") {
+    password.push(randomSpecChar());
+  }
+  console.log(password);
+  // 4. append the result to the password array
+  // 5. loop by parsed value of characterLength
+  // 6. somehow make sure each valid function is selected at least once, or slice and run again
+};
+  // 7. return the resulting password array result to the #password html.
   // var password = generatePassword();
   // var passwordText = document.querySelector("#password");
 
@@ -135,13 +180,13 @@ function otherCriteriaInput() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// create pwCriteria = [
+// create pwCriteria = {
   // characters: []
   // lowercase: ""
   // uppercase: ""
   // numeric: ""
   // special-chars: ""
-  // ]
+  // }
 
 // prompt character length
   // choose between 8 - 128 ; inval if null.
