@@ -5,15 +5,15 @@ This Password-generator was created to provide a secure password the user could 
 
 ## Usage
 The following screenshots show the functionality of my Password-generator through each prompt, assuming 8 characters and all characters are desired:
-![start](Assets\PW_Start.png), ![character length prompt](Assets\PW_first_prompt.png), ![second prompt](Assets\PW_criteria_notification_prompt.png), ![lowercase prompt](Assets\PW_lowercase_prompt.png), ![uppercase prompt](Assets\PW_uppercase_prompt.png), ![numbers prompt](Assets\PW_numbers_prompt.png), ![special characters prompt](Assets\PW_specChars_prompt.png), ![confirmation of selected criteria](Assets\PW_criteriaConfirmation_prompt.png), ![generated password](Assets\PW_generatedPassword_prompt.png).
+![start](\Assets\PW_Start.png), ![character length prompt](\Assets\PW_first_prompt.png), ![second prompt](\Assets\PW_criteria_notification_prompt.png), ![lowercase prompt](\Assets\PW_lowercase_prompt.png), ![uppercase prompt](\Assets\PW_uppercase_prompt.png), ![numbers prompt](\Assets\PW_numbers_prompt.png), ![special characters prompt](\Assets\PW_specChars_prompt.png), ![confirmation of selected criteria](\Assets\PW_criteriaConfirmation_prompt.png), ![generated password](\Assets\PW_generatedPassword_prompt.png).
 
 The validations and their resulting prompts were set up to do the following: 
 1. prevent non-numbers from being entered into the quantity of desired characters. Will return the user to enter their character length, again.
-![not a number input](Assets\PW_invalidCharLength_validation2.png)
+![not a number input](\Assets\PW_invalidCharLength_validation2.png)
 2. prevent numbers < 8 or > 128 from being entered. This will also retrigger the character length selection prompt.
-![less than 8 or greater than 128 characters input](Assets\PW_invalidCharLength_validation.png)
+![less than 8 or greater than 128 characters input](\Assets\PW_invalidCharLength_validation.png)
 3. prevent situations where no character types were selected. It will pass them back through the 4 selectable criteria to allow them to update their selections.
-![no criteria selected](Assets\PW_noSelections_validation.png)
+![no criteria selected](\Assets\PW_noSelections_validation.png)
 
 ## Credits
 I know youtube is taboo, but I was struggling to find a succinct way to do the random generation of the various character types. The only bit I did use from a video I watched was the random generation formatting from https://www.youtube.com/watch?v=duNmhKgtcsI to create the letters and get an idea of how to do the special characters. The numbers were from a previous module/classes that we have done. I was looking for a shortcut that would help me not to have to type out 52 strings in arrays for the uppercase/lowercase letters, mainly, and what I found achieves that using the existing fromCharCode(); function, which I am sure I could use at a later date.
