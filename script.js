@@ -104,7 +104,6 @@ function otherCriteriaInput() {
 
   var specCharCheck = window.confirm("Special Characters");
   pwCriteria.specialCharacters = specCharCheck;
-  console.log(pwCriteria);
   if (specCharCheck === true) {
     desiredTasks.push("special characters");
   }
@@ -168,14 +167,25 @@ function otherCriteriaInput() {
 }
 
 function generatePassword() {
+  // select AT LEAST one of each desired character type and add characters to the password array as they are generated
+  if (desiredTasks.includes("lowercase")) {
+    password.push(randomLower());
+  }
+  if (desiredTasks.includes("uppercase")) {
+    password.push(randomUpper());
+  }
+  if (desiredTasks.includes("numbers")) {
+    password.push(randomNumber(0, 9));
+  }
+  if (desiredTasks.includes("special characters")) {
+    password.push(randomSpecChar());
+  }
   // randomize between the true statements
-  // run the function associated with the true statement on a loop until the quantity
+  // run the function associated with the true statement on a loop until the remaining quantity
   // of desired characters reached, adding characters to the password array as they are generated
-
-  for (i = 0; i < pwCriteria.characters; i++) {
+  for (i = 0; i < (pwCriteria.characters - desiredTasks.length); i++) {
     var randomSelect =
       desiredTasks[Math.floor(Math.random() * desiredTasks.length)];
-    console.log(randomSelect);
     if (randomSelect === "lowercase") {
       // 4. append the result to the password array
       password.push(randomLower());
@@ -190,6 +200,7 @@ function generatePassword() {
 
   // display password with commas removed
   window.alert("your password is:\n" + password.join(""));
+  // refresh the page after closing the password alert to clear the session data. required to allow subsequent pw generation to NOT have previous criteria inputs...
   location.reload();
 }
 
